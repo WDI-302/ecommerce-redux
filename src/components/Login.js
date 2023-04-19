@@ -12,17 +12,31 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from '../redux/userSlice';
 
 
 export default function Login() {
+
+  const dispatch = useDispatch()  
+
+  const user = useSelector(state => state.user)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    // console.log({
+    //   username: data.get('username'),
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
+      let userObj = {
       username: data.get('username'),
       email: data.get('email'),
       password: data.get('password'),
-    });
+    }
+
+    dispatch(fetchUser(userObj))
   };
 
 
@@ -39,6 +53,7 @@ export default function Login() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
+          User: {user.username}
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
