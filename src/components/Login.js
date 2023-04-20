@@ -39,7 +39,6 @@ export default function Login() {
     dispatch(fetchUser(userObj))
   };
 
-
   return (
       <Container component="main" maxWidth="xs">
         <Box
@@ -53,7 +52,8 @@ export default function Login() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          User: {user.username}
+          User: {user.username} <br />
+          Email: {user.email}
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>

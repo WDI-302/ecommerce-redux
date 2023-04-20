@@ -7,9 +7,7 @@ import Login from './components/Login'
 function App() {
   return (
     <>
-    {/* <Home />
-    <Register /> */}
-    <Login />
+    <Register />
     </>
   );
 }
