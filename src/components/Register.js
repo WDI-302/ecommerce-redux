@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useSelector, useDispatch } from 'react-redux';
 import { registerUser } from '../redux/userSlice';
+import { validator } from '../lib/validator';
 
 export default function Register() {
 
@@ -31,14 +32,23 @@ export default function Register() {
     //   email: data.get('email'),
     //   password: data.get('password'),
     // });
+  let userObj = {
+    firstname: data.get('firstName'),
+    lastname: data.get('lastName'),
+    username: data.get('username'),
+    email: data.get('email'),
+    password: data.get('password'),
+  }
+    userObj.password !== data.get('password1') && alert('Passwords dont match')
+    validator(userObj)
     
-    dispatch(registerUser({
-      firstname: data.get('firstName'),
-      lastname: data.get('lastName'),
-      username: data.get('username'),
-      email: data.get('email'),
-      password: data.get('password'),
-    }))
+    // dispatch(registerUser({
+    //   firstname: data.get('firstName'),
+    //   lastname: data.get('lastName'),
+    //   username: data.get('username'),
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // }))
 
 
   };
@@ -83,7 +93,8 @@ export default function Register() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField 
+                <TextField
+                  error={false} 
                   required
                   fullWidth
                   id='username'
@@ -110,6 +121,17 @@ export default function Register() {
                   label="Password"
                   type="password"
                   id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password1"
+                  label="Confirm Password"
+                  type="password"
+                  id="password1"
                   autoComplete="new-password"
                 />
               </Grid>
