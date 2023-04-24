@@ -119,7 +119,7 @@ export const validator = (props) => {
         const element = props[key];
         validObj = {
             ...validObj,
-            [key]: checker(key, element)
+            [key]:  checker(key, element)
         }
     }
 

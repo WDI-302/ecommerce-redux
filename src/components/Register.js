@@ -67,6 +67,7 @@ export default function Register() {
     email: data.get('email'),
     password: data.get('password'),
   }
+ 
     userObj.password !== data.get('password1') ?
       setPwdMatch({
         error: true,
@@ -77,18 +78,29 @@ export default function Register() {
         error: false,
         message: ''
       })
+      
+      const validObj = validator(userObj)
+      let isErrors = false
 
-    setIsValid(validator(userObj))
+      for (const key in validObj) {
+        if (validObj[key].error) {
+          isErrors = true
+        }
+      }
+      
+      isErrors ? setIsValid(validObj) 
+      : 
+      (userObj.password === data.get('password1')) 
+      && dispatch(registerUser(userObj))
+    
 
-    
-    
-    dispatch(registerUser({
-      firstname: data.get('firstName'),
-      lastname: data.get('lastName'),
-      username: data.get('username'),
-      email: data.get('email'),
-      password: data.get('password'),
-    }))
+    // dispatch(registerUser({
+    //   firstname: data.get('firstName'),
+    //   lastname: data.get('lastName'),
+    //   username: data.get('username'),
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // }))
 
 
   };
