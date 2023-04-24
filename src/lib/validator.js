@@ -5,32 +5,123 @@ const checker = (key, element) => {
         // true = error
         switch (key) {
             case 'firstname':
-                console.log(element)
-                return false
+                if ( element === '') {
+                    return {
+                        error: true,
+                        message: "Cannot be empty"
+                    }
+                }
+                if ( element.includes(' ')) {
+                    return {
+                        error: true,
+                        message: "Cannot contain spaces"
+                    }
+                }
+                return {
+                    error: false,
+                    message: ''
+                  }
             case 'lastname':
-                console.log(element)
-                return false
+                if ( element === '') {
+                    return {
+                        error: true,
+                        message: "Cannot be empty"
+                    }
+                }
+                if ( element.includes(' ')) {
+                    return {
+                        error: true,
+                        message: "Cannot contain spaces"
+                    }
+                }
+                return {
+                    error: false,
+                    message: ''
+                  }
             case 'username':
-                console.log(element)
-                return false
+                if ( element === '') {
+                    return {
+                        error: true,
+                        message: "Cannot be empty"
+                    }
+                }
+                if ( element.includes(' ')) {
+                    return {
+                        error: true,
+                        message: "Cannot contain spaces"
+                    }
+                }
+                return {
+                    error: false,
+                    message: ''
+                }
             case 'email':
-                console.log(element)
-                return false
+                if ( element === '') {
+                    return {
+                        error: true,
+                        message: "Cannot be empty"
+                    }
+                }
+                if ( element.includes(' ')) {
+                    return {
+                        error: true,
+                        message: "Cannot contain spaces"
+                    }
+                }
+                if ( !element.includes('@') || !element.includes('.')) {
+                    return {
+                        error: true,
+                        message: "Not a valid email"
+                    }
+                }
+                return {
+                    error: false,
+                    message: ''
+                  }
             case 'password':
-                console.log(element)
-                return false
+                if ( element === '') {
+                    return {
+                        error: true,
+                        message: "Cannot be empty"
+                    }
+                }
+                if ( element.includes(' ')) {
+                    return {
+                        error: true,
+                        message: "Cannot contain spaces"
+                    }
+                }
+                // if ( element.length < 8) {
+                //     return {
+                //         error: true,
+                //         message: "Password must be at least 8 characters"
+                //     }
+                // }
+                // let pattern = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$')
+                // if (!pattern.test(element)) {
+                //     return {
+                //         error: true,
+                //         message: "Password must be MORE COMPLEX"
+                //     }
+                // }
+                return {
+                    error: false,
+                    message: ''
+                  }
             default:
                 break;
         }
 } 
 
 export const validator = (props) => {
-    
+    let validObj = {...props}
     for (const key in props) {
         const element = props[key];
-        checker(key, element)
-       
+        validObj = {
+            ...validObj,
+            [key]: checker(key, element)
+        }
     }
 
-  return true
+  return validObj
 }

@@ -26,6 +26,29 @@ export default function Register() {
     message: ''
   })
 
+  const [isValid, setIsValid] = useState({
+    firstname:{
+      error: false,
+      message: ''
+    }, 
+    lastname:{
+      error: false,
+      message: ''
+    }, 
+    username:{
+      error: false,
+      message: ''
+    }, 
+    email:{
+      error: false,
+      message: ''
+    }, 
+    password:{
+      error: false,
+      message: ''
+    }, 
+  })
+
   const handleSubmit = (event) => {
 
     event.preventDefault();
@@ -54,16 +77,18 @@ export default function Register() {
         error: false,
         message: ''
       })
-      
-    validator(userObj)
+
+    setIsValid(validator(userObj))
+
     
-    // dispatch(registerUser({
-    //   firstname: data.get('firstName'),
-    //   lastname: data.get('lastName'),
-    //   username: data.get('username'),
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // }))
+    
+    dispatch(registerUser({
+      firstname: data.get('firstName'),
+      lastname: data.get('lastName'),
+      username: data.get('username'),
+      email: data.get('email'),
+      password: data.get('password'),
+    }))
 
 
   };
@@ -95,8 +120,8 @@ export default function Register() {
                   label="First Name"
                   autoComplete="given-name"
                   autoFocus
-                  error={false}
-                  helperText=''
+                  error={isValid.firstname.error}
+                  helperText={isValid.firstname.message}
                   />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -107,17 +132,20 @@ export default function Register() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  error={isValid.lastname.error}
+                  helperText={isValid.lastname.message}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  error={false} 
                   required
                   fullWidth
                   id='username'
                   label='Username'
                   name='username'
                   autoComplete='username'
+                  error={isValid.username.error}
+                  helperText={isValid.username.message}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -128,6 +156,8 @@ export default function Register() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  error={isValid.email.error}
+                  helperText={isValid.email.message}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -139,6 +169,8 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  error={isValid.password.error}
+                  helperText={isValid.password.message}
                 />
               </Grid>
               <Grid item xs={12}>
