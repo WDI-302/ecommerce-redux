@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import Axios from '../lib/Axios'
-import { SatelliteAlt } from "@mui/icons-material"
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async userData => {
     let response = await Axios.post('/users/login', userData)

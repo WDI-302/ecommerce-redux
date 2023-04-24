@@ -21,6 +21,11 @@ export default function Register() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
 
+  const [pwdMatch, setPwdMatch] = useState({
+    error: false,
+    message: ''
+  })
+
   const handleSubmit = (event) => {
 
     event.preventDefault();
@@ -39,7 +44,17 @@ export default function Register() {
     email: data.get('email'),
     password: data.get('password'),
   }
-    userObj.password !== data.get('password1') && alert('Passwords dont match')
+    userObj.password !== data.get('password1') ?
+      setPwdMatch({
+        error: true,
+        message: "Passwords do not match"
+      })
+      :
+      setPwdMatch({
+        error: false,
+        message: ''
+      })
+      
     validator(userObj)
     
     // dispatch(registerUser({
@@ -80,6 +95,8 @@ export default function Register() {
                   label="First Name"
                   autoComplete="given-name"
                   autoFocus
+                  error={false}
+                  helperText=''
                   />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -133,6 +150,8 @@ export default function Register() {
                   type="password"
                   id="password1"
                   autoComplete="new-password"
+                  error={pwdMatch.error}
+                  helperText={pwdMatch.message}
                 />
               </Grid>
             </Grid>
