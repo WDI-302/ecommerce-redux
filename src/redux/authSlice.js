@@ -1,4 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { userLogout } from "./userSlice";
+
+export const authLogout = createAsyncThunk('auth/authLogout', async (_, thunkAPI) => {
+    localStorage.removeItem('jwtToken')
+    thunkAPI.dispatch(userLogout())
+})
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -12,6 +18,12 @@ export const authSlice = createSlice({
         authFailure: (state) => {
             state.isAuth = false
         }
+    },
+    extraReducers: builder => {
+        builder
+            .addCase(authLogout.fulfilled, (state) => {
+                state.isAuth = false
+            })
     }
 })
 

@@ -7,7 +7,7 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async (userData, thu
 
     // remember me button checked
     // isRemember && localStorage.setItem('jwtToken', response.data.token)
-    
+
     localStorage.setItem('jwtToken', response.data.token)
     
     //dispact authSlice - authSuccess
@@ -25,16 +25,20 @@ export const registerUser = createAsyncThunk('user/registerUser', async userData
     }
 })
 
+const initialState = {
+    username: '',
+    email: '',
+    password: ''
+}
+
 export const userSlice = createSlice({
     name: 'user',
-    initialState: {
-        username: '',
-        email: '',
-        password: ''
-    },
+    initialState: initialState,
     // syncronous set state
     reducers: {
-
+        userLogout: (state) => {
+            state =  initialState
+        }
     },
     // asyncronous set state
     extraReducers: builder => {
@@ -51,6 +55,6 @@ export const userSlice = createSlice({
     }
 })
 
-export const {} = userSlice.actions
+export const {userLogout} = userSlice.actions
 
 export default userSlice.reducer
