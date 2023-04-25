@@ -1,7 +1,11 @@
 import React from 'react'
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Home = () => {
+
+    const user = useSelector( state => state.user)
+
   return (
     <Container 
         maxWidth='lg'
@@ -12,9 +16,11 @@ const Home = () => {
       sx={{backgroundColor:'cyan'}}
       >
         <Typography variant='h1'>
-          Hello World
+          Please Login
         </Typography>
     </Box>
+    <Button variant='contained' href='/login'>Login</Button>
+    <Button variant='contained' href='/register'>Register</Button>
   </Container>
   )
 }
