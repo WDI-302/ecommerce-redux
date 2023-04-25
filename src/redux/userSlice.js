@@ -1,11 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import Axios from '../lib/Axios'
+import { authSuccess } from "./authSlice"
 
-export const fetchUser = createAsyncThunk('user/fetchUser', async userData => {
+export const fetchUser = createAsyncThunk('user/fetchUser', async (userData, thunkAPI) => {
     let response = await Axios.post('/users/login', userData)
+
+    // remember me button checked
+    // isRemember && localStorage.setItem('jwtToken', response.data.token)
+    
+    localStorage.setItem('jwtToken', response.data.token)
+    
+    //dispact authSlice - authSuccess
+    thunkAPI.dispatch(authSuccess())
+
     return  {
-        user: response.data.userObj,
-        token: response.data.token
+        user: response.data.userObj
     }
 })
 

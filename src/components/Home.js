@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Home = () => {
 
-    const user = useSelector( state => state.user)
+    const user = useSelector( state => state.user )
+    const auth = useSelector( state => state.auth.isAuth )
 
   return (
     <Container 
@@ -19,8 +20,15 @@ const Home = () => {
           Please Login
         </Typography>
     </Box>
-    <Button variant='contained' href='/login'>Login</Button>
-    <Button variant='contained' href='/register'>Register</Button>
+    {
+      auth ?
+      <Button variant='contained' href='/'>Logout</Button>
+      :
+      <>
+        <Button variant='contained' href='/login'>Login</Button>
+        <Button variant='contained' href='/register'>Register</Button>
+      </>
+    }
   </Container>
   )
 }
