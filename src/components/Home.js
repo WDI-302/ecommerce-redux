@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { Box, Button, Container, Typography } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { authFailure, authLogout, authSuccess } from '../redux/authSlice';
+import { authCheck, authFailure, authLogout, authSuccess } from '../redux/authSlice';
 import {checkAuthToken} from '../lib/checkAuthToken'
 
 const Home = () => {
@@ -10,10 +10,11 @@ const Home = () => {
     const auth = useSelector( state => state.auth.isAuth )
 
     useEffect(() => {
-      let authy = checkAuthToken()
-      authy ? dispatch(authSuccess())
-      :
-      dispatch(authFailure())
+      // let authy = checkAuthToken()
+      // authy ? dispatch(authSuccess())
+      // :
+      // dispatch(authFailure())
+      dispatch(authCheck())
     }, [])
     
 
