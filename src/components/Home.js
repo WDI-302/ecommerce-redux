@@ -24,8 +24,7 @@ const Home = () => {
     <Box 
       maxWidth='xs' 
       m={3} 
-      sx={{backgroundColor:'cyan'}}
-      >
+    >
         <Typography variant='h1'>
           Please Login
         </Typography>
