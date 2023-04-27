@@ -14,7 +14,8 @@ const Home = () => {
       // authy ? dispatch(authSuccess())
       // :
       // dispatch(authFailure())
-      dispatch(authCheck())
+
+      // dispatch(authCheck())
     }, [])
     
 

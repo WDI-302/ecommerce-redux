@@ -13,11 +13,12 @@ const Layout = () => {
     // let auth = checkAuthToken()
     //
     // check authentication with backend
+    //
     const auth = useSelector( state => state.auth.isAuth )
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(authCheck())
-      }, [])
+      }, [auth])
 
   return (
     <>
